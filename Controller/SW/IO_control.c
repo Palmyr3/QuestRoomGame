@@ -6,23 +6,6 @@ volatile uint8_t inputValueBuffer[INPUT_VALIE_BUFF_SIZE];
 
 volatile uint32_t resetCouner;
 
-
-//FirstStateNumProcess
-volatile uint32_t timeoutDownCounterFirst = 0;
-volatile uint32_t stateFirst = 0;
-volatile uint8_t outValueFirst = INPUT_OFF;
-
-//SecondStateNumProcess
-volatile uint32_t timeoutDownCounterSecond = 0;
-volatile uint32_t stateSecond = 0;
-volatile uint8_t outValueSecond = INPUT_OFF;
-
-//ThirdStateNumProcess
-volatile uint32_t timeoutDownCounterThird = 0;
-volatile uint8_t outValueThird = INPUT_OFF;
-volatile uint32_t chanelDelta1 = 0, chanelDelta2 = 0, chanelDelta3 = 0;
-
-
 void OutputsInit(void)
 {
 	//Configuration of GPIOA3, GPIOA2, GPIO1 as push-pull output, no pull-up/down, max frequency
@@ -524,6 +507,11 @@ void IOInit(void)
 
 uint8_t FirstStateNumProcess(uint8_t chanel1, uint8_t chanel2, uint8_t chanel3, uint8_t chanel4, uint8_t chanel5, uint8_t chanel6, uint8_t chanel7)
 {
+	//FirstStateNumProcess
+	static uint32_t timeoutDownCounterFirst = 0;
+	static uint32_t stateFirst = 0;
+	static uint8_t outValueFirst = INPUT_OFF;
+
 	if(chanel1)
 	{
 		timeoutDownCounterFirst = SIN_DOWNCOUNTER_VALUE;
@@ -576,6 +564,11 @@ uint8_t FirstStateNumProcess(uint8_t chanel1, uint8_t chanel2, uint8_t chanel3, 
 
 uint8_t SecondStateNumProcess(uint8_t chanel1, uint8_t chanel2, uint8_t chanel3, uint8_t chanel4, uint8_t chanel5, uint8_t chanel6, uint8_t chanel7)
 {
+	//SecondStateNumProcess
+	static uint32_t timeoutDownCounterSecond = 0;
+	static uint32_t stateSecond = 0;
+	static uint8_t outValueSecond = INPUT_OFF;
+	
 	if(chanel1)
 	{
 		timeoutDownCounterSecond = SIN_DOWNCOUNTER_VALUE;
@@ -649,6 +642,11 @@ void SetResetCounterInit(void)
 uint8_t ThirdStateNumProcess(uint8_t chanel1, uint8_t chanel2, uint8_t chanel3)
 {
 	//max timeout output is TRUE after event end
+	
+	//ThirdStateNumProcess
+	static uint32_t timeoutDownCounterThird = 0;
+	static uint8_t outValueThird = INPUT_OFF;
+	static uint32_t chanelDelta1 = 0, chanelDelta2 = 0, chanelDelta3 = 0;
 
 	//inverted 1
 	if(!chanel1)

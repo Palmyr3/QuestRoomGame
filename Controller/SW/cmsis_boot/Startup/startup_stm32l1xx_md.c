@@ -192,18 +192,18 @@ void Default_Reset_Handler(void)
   unsigned long *pulSrc, *pulDest;
 
   /* Copy the data segment initializers from flash to SRAM */
-//  pulSrc = &_sidata;
-//
-//  for(pulDest = &_sdata; pulDest < &_edata; )
-//  {
-//    *(pulDest++) = *(pulSrc++);
-//  }
-//
-//  /* Zero fill the bss segment. */
-//  for(pulDest = &_sbss; pulDest < &_ebss; )
-//  {
-//    *(pulDest++) = 0;
-//  }
+  pulSrc = &_sidata;
+
+  for(pulDest = &_sdata; pulDest < &_edata; )
+  {
+    *(pulDest++) = *(pulSrc++);
+  }
+
+  /* Zero fill the bss segment. */
+  for(pulDest = &_sbss; pulDest < &_ebss; )
+  {
+    *(pulDest++) = 0;
+  }
 
   /* Setup the microcontroller system. */
   SystemInit();
